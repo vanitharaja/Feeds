@@ -113,21 +113,6 @@ static NSString *cellIdentifier = @"FeedCell";
                                                                    attribute:NSLayoutAttributeCenterY 
                                                                   multiplier:1.0 
                                                                     constant:0.0]];
-    
-//    UIView *superview = self.view;
-//    NSDictionary *variables = NSDictionaryOfVariableBindings(self.activityIndicatorView, superview);
-//    NSArray *constraints =  [NSLayoutConstraint constraintsWithVisualFormat:@"V:[superview]-(<=1)-[activityIndicatorView]"
-//                                            options: NSLayoutFormatAlignAllCenterX
-//                                            metrics:nil
-//                                              views:variables];
-//    [self.view addConstraints:constraints];
-//    
-//    constraints =
-//    [NSLayoutConstraint constraintsWithVisualFormat:@"H:[superview]-(<=1)-[activityIndicatorView]"
-//                                            options: NSLayoutFormatAlignAllCenterY
-//                                            metrics:nil
-//                                              views:variables];
-//    [self.view addConstraints:constraints];
 }
 
 
@@ -136,6 +121,12 @@ static NSString *cellIdentifier = @"FeedCell";
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+/**
+ *  This Method to get the refersh the feed content
+ *
+ *
+ */
 
 -(void)refresh{
 
@@ -200,7 +191,7 @@ static NSString *cellIdentifier = @"FeedCell";
     //Download image
     cell.tag = indexPath.row;
 
-    if (feed.imageHref.length>0 && feed.isDownloaded == NO)
+    if (feed.imageHref.length>0 && feed.isDownloaded == NO && [self checkExistence:feed.imageHref] == NO)
     {
         cell.imageView.image = nil;
         dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
@@ -264,14 +255,25 @@ static NSString *cellIdentifier = @"FeedCell";
 
 #pragma mark - Method to save and Retrieve image
 
+/**
+ *  This Method to save the image to document directory
+ *
+ *  @param imgURL url of the image from WS
+ */
+
 - (IBAction)saveImage :(UIImage*)img :(NSString*)imgUrl {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *savedImagePath = [documentsDirectory stringByAppendingPathComponent:[imgUrl lastPathComponent]];
-//    UIImage *image = imageView.image; // imageView is my image from camera
     NSData *imageData = UIImagePNGRepresentation(img);
     [imageData writeToFile:savedImagePath atomically:NO];
 }
+
+/**
+ *  This Method to get the image from document directory
+ *
+ *  @param imgURL url of the image from WS
+ */
 
 - (UIImage*)getImage :(NSString*)imgURL {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,     NSUserDomainMask, YES);
@@ -281,4 +283,25 @@ static NSString *cellIdentifier = @"FeedCell";
     return img;
 }
 
+/**
+ *  This Method to check existence of image in document directory
+ *
+ *  @param imgURL url of the image from WS
+ */
+
+-(BOOL)checkExistence :(NSString*)imgURL
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *writablePath = [documentsDirectory stringByAppendingPathComponent:[imgURL lastPathComponent]];
+    
+    if([fileManager fileExistsAtPath:writablePath]){
+        return YES;
+    }
+    else{
+        // file doesn't exist
+    }
+    return NO;
+}
 @end

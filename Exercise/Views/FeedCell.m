@@ -143,32 +143,16 @@
 
 - (CGFloat)heightForFeed:(Feed*)feed{
     
-    CGFloat ratioOfLayoutWidth = ([[UIScreen mainScreen] bounds].size.width - 120-15 -15);/// [[UIScreen mainScreen] bounds].size.width;
-    NSLog(@"ratioOfLayoutWidth %f",ratioOfLayoutWidth);
-    
-   //CGFloat preferredMaxLayoutWidth = (ratioOfLayoutWidth / 100) * [[UIScreen mainScreen] bounds].size.width;
-   
-   CGFloat height = [self desiredHightText:feed.desc maxWidth:ratioOfLayoutWidth];
-    
-
-    NSLog(@"height %@ : %f",feed.title,height);
-//    if (height < 21 )//kDEFAULT_HEIGHT
-//        return 130;
-  if (height+30<130)
-       return 130;
+    CGFloat ratioOfLayoutWidth = ([[UIScreen mainScreen] bounds].size.width - 120-15 -15);/// [[UIScreen mainScreen] bounds].size.width
+    CGFloat height = [self desiredHightText:feed.desc maxWidth:ratioOfLayoutWidth];
+    if (height+30<130)
+        return 130;
     
     return height+30;
-    
 }
 
 
 -(CGFloat)desiredHightText:(NSString*)text maxWidth:(CGFloat)maxWidth{
-    
-    //self._detailTextLabel.text = text;
-    //return ceilf(self._detailTextLabel.frame.size.height);
-    
-    NSDictionary *attributes = @{NSFontAttributeName:self._detailTextLabel.font};
-    CGSize constraint = CGSizeMake(maxWidth ,CGFLOAT_MAX);
     NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.lineBreakMode = NSLineBreakByCharWrapping;
     paragraphStyle.alignment = NSTextAlignmentLeft;
@@ -180,10 +164,7 @@
                                    NSParagraphStyleAttributeName : paragraphStyle
                                    }
                       context:nil];
-    
-//    CGRect rect = [text boundingRectWithSize:constraint options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading)
-//                                  attributes:attributes context:nil];
-    
+
     
     return ceilf(rect.size.height);
 }
