@@ -20,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		40E5DF8C1C072D4C00B883DF /* Constant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Constant.h; path = ../Constant.h; sourceTree = "<group>"; };
 		5AC6F9791C030AAA0039F672 /* Exercise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Exercise.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AC6F97D1C030AAB0039F672 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5AC6F97F1C030AAB0039F672 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -76,6 +77,7 @@
 				5AC6F99B1C030B350039F672 /* Views */,
 				5AC6F97F1C030AAB0039F672 /* AppDelegate.h */,
 				5AC6F9801C030AAB0039F672 /* AppDelegate.m */,
+				40E5DF8C1C072D4C00B883DF /* Constant.h */,
 				5AC6F9851C030AAB0039F672 /* Main.storyboard */,
 				5AC6F9881C030AAB0039F672 /* Assets.xcassets */,
 				5AC6F98A1C030AAB0039F672 /* LaunchScreen.storyboard */,
@@ -354,6 +356,7 @@
 				5AC6F9921C030AAB0039F672 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

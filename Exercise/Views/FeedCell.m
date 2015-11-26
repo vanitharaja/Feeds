@@ -114,7 +114,9 @@
     
 }
 
-/** Method to bind the details from WS to the Tablecell **/
+/**
+ *  This Method is to bind the details from WS to the Tablecel *  @param Feed feed
+ */
 
 -(void)configureCell:(Feed*)feed{
     
@@ -139,7 +141,11 @@
     [self layoutIfNeeded];
 }
 
-/** Method to find the height of the feed description, so as to determine the height of the cell **/
+/**
+ *  This Method is to find the height of the feed description, so as to determine the height of the cell
+ *
+ *  @param Feed feed
+ */
 
 - (CGFloat)heightForFeed:(Feed*)feed{
     
@@ -151,6 +157,12 @@
     return height+30;
 }
 
+/**
+ *  This Method to get the height of the Feed desc
+ *
+ *  @param text feed description
+ *  @param maxWidth width of the detailed label
+ */
 
 -(CGFloat)desiredHightText:(NSString*)text maxWidth:(CGFloat)maxWidth{
     NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];

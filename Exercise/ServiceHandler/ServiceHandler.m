@@ -7,7 +7,7 @@
 //
 
 #import "ServiceHandler.h"
-
+#import "Constant.h"
 
 @interface ServiceHandler()
 
@@ -66,31 +66,30 @@
             
             [self.userContent.feeds removeAllObjects];
             
-            NSString *title = [responseDictionary objectForKey:@"title"];
-            NSArray *rows = [responseDictionary objectForKey:@"rows"];
+            NSString *title = [responseDictionary objectForKey:WS_RESPONSE_TITLE_KEY];
+            NSArray *rows = [responseDictionary objectForKey:WS_RESPONSE_ROOT_KEY];
             self.userContent.title = title;
             
             for (NSDictionary *row in rows) {
                 NSLog(@"row %@",row);
                 
                 Feed *feed = [[Feed alloc] init];
-                feed.title = [row objectForKey:@"title"];
+                feed.title = [row objectForKey:WS_RESPONSE_TITLE_KEY];
                 if ([feed.title isEqual:[NSNull null]]) {
                     feed.title = @"";
                 }
                 
-                feed.desc = [row objectForKey:@"description"];
+                feed.desc = [row objectForKey:WS_RESPONSE_DECRIPTION_KEY];
                 if ([feed.desc isEqual:[NSNull null]]) {
                     feed.desc = @"";
                 }
 
                 feed.desc = [NSString stringWithFormat:@"%@",feed.desc];
-                feed.imageHref = [row objectForKey:@"imageHref"];
+                feed.imageHref = [row objectForKey:WS_RESPONSE_IMAGEURL_KEY];
                 if ([feed.imageHref isEqual:[NSNull null]]) {
                     feed.imageHref = @"";
                 }
-
-                NSLog(@" feed.descs %@", feed.desc);
+                
                 [self.userContent.feeds addObject:feed];
                 feed = nil;
                 
