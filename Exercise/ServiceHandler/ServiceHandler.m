@@ -30,11 +30,12 @@
 
 -(void)getUserContent:(void (^)(UserContent *userContent))successCallback failure:(void (^)(NSError *error))failureCallback{
     
-    NSURL *url = [NSURL URLWithString:@"https://dl.dropboxusercontent.com/u/746330/facts.json"];
+    NSURL *url = [NSURL URLWithString:WS_URL];
     NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:config];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    [request setTimeoutInterval:WS_TIMEOUT_KEY];
     
     
     [[session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
@@ -48,7 +49,7 @@
         
         NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:[responseString dataUsingEncoding:NSUTF8StringEncoding]  options:0 error:&error];
         
-        NSLog(@"responseDictionary %@",responseDictionary);
+//        NSLog(@"responseDictionary %@",responseDictionary);
         
         
         if (error != nil) {
@@ -71,8 +72,6 @@
             self.userContent.title = title;
             
             for (NSDictionary *row in rows) {
-                NSLog(@"row %@",row);
-                
                 Feed *feed = [[Feed alloc] init];
                 feed.title = [row objectForKey:WS_RESPONSE_TITLE_KEY];
                 if ([feed.title isEqual:[NSNull null]]) {

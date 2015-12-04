@@ -8,11 +8,12 @@
 
 #ifndef Constant_h
 #define Constant_h
-#define WS_URL @""
+// Web service
+#define WS_URL @"https://dl.dropboxusercontent.com/u/746330/facts.json"
 #define WS_RESPONSE_ROOT_KEY @"rows"
 #define WS_RESPONSE_TITLE_KEY @"title"
 #define WS_RESPONSE_DECRIPTION_KEY @"description"
 #define WS_RESPONSE_IMAGEURL_KEY @"imageHref"
-
+#define WS_TIMEOUT_KEY 10.0
 
 #endif /* Constant_h */

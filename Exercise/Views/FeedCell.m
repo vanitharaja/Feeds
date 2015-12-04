@@ -9,8 +9,15 @@
 #import "FeedCell.h"
 
 
+
 #define kDEFAULT_HEIGHT 21
 #define kMORE_HEIGHT 10
+//Tablecell constants
+#define FEEDCELL_IMG_WIDTH 120
+#define FEEDCELL_IMG_TRAILINGCONSTRAINT 15
+#define FEEDCELL_DETAIL_LEADINGCONSTRAINT 15
+#define FEEDCELL_NOTITLE @"Title is not provided"
+#define FEEDCELL_NODETAIL @"Content is not provided"
 
 @interface FeedCell()
 
@@ -31,14 +38,10 @@
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    
-    
     [self addSubviews];
     [self addConstraints];
     self.backgroundColor = [UIColor grayColor];
     [self.contentView layoutIfNeeded];
-    
-    
     return self;
 }
 
@@ -126,7 +129,7 @@
     }
     else{
         self._titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Italic" size:10];
-        self._titleLabel.text = @"Title is not provided";
+        self._titleLabel.text = FEEDCELL_NOTITLE;
 
     }
     
@@ -136,7 +139,7 @@
     }
     else{
         self._detailTextLabel.font = [UIFont fontWithName:@"HelveticaNeue-Italic" size:10];
-        self._detailTextLabel.text = @"Content is not provided";
+        self._detailTextLabel.text = FEEDCELL_NODETAIL;
     }
     [self layoutIfNeeded];
 }
@@ -148,8 +151,7 @@
  */
 
 - (CGFloat)heightForFeed:(Feed*)feed{
-    
-    CGFloat ratioOfLayoutWidth = ([[UIScreen mainScreen] bounds].size.width - 120-15 -15);/// [[UIScreen mainScreen] bounds].size.width
+    CGFloat ratioOfLayoutWidth = ([[UIScreen mainScreen] bounds].size.width - FEEDCELL_IMG_WIDTH-FEEDCELL_DETAIL_LEADINGCONSTRAINT -FEEDCELL_IMG_TRAILINGCONSTRAINT);
     CGFloat height = [self desiredHightText:feed.desc maxWidth:ratioOfLayoutWidth];
     if (height+30<130)
         return 130;

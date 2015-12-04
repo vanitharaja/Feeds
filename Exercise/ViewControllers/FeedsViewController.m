@@ -188,9 +188,10 @@ static NSString *cellIdentifier = @"FeedCell";
     NSLog(@"text lenght %@", NSStringFromCGRect(cell.detailTextLabel.frame));
     NSLog(@"feeds desc %@",feed.desc);
     
-    //Download image
+   
     cell.tag = indexPath.row;
 
+     //check whether the image is already downloaded, assure the image is not in the document directory and then download the image.
     if (feed.imageHref.length>0 && feed.isDownloaded == NO && [self checkExistence:feed.imageHref] == NO)
     {
         cell.imageView.image = nil;
@@ -227,23 +228,16 @@ static NSString *cellIdentifier = @"FeedCell";
     
     FeedCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FeedCell"];
     Feed *feed = [self.feeds objectAtIndex:indexPath.row];
-    
-    
     return [cell heightForFeed:feed];
 }
 
 #pragma mark - Orientation methods
+
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
-    
-    // Code here will execute before the rotation begins.
-    // Equivalent to placing it in the deprecated method -[willRotateToInterfaceOrientation:duration:]
-    
+
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context) {
-        
-        // Place code here to perform animations during the rotation.
-        // You can pass nil or leave this block empty if not necessary.
         
     } completion:^(id<UIViewControllerTransitionCoordinatorContext> context) {
         
@@ -284,7 +278,7 @@ static NSString *cellIdentifier = @"FeedCell";
 }
 
 /**
- *  This Method to check existence of image in document directory
+ *  This Method is to check the existence of image in document directory. Mainly used to know whether the same image is already downloaded.
  *
  *  @param imgURL url of the image from WS
  */
