@@ -246,6 +246,14 @@ static NSString *cellIdentifier = @"FeedCell";
         
     }];
 }
+- (void) willRotateToInterfaceOrientation: (UIInterfaceOrientation) toInterfaceOrientation duration: (NSTimeInterval) duration {
+    [self.tableView reloadData];
+}
+- (BOOL)shouldAutorotate
+{
+    return YES;
+}
+
 
 #pragma mark - Method to save and Retrieve image
 
